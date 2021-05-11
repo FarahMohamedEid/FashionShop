@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "69205182071",
+    "project_id": "fashionshop-d000c",
+    "storage_bucket": "fashionshop-d000c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:69205182071:android:b7bf626d6af880e7876872",
+        "android_client_info": {
+          "package_name": "farah.e_shop"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "69205182071-91n31hp2h19edihe38c0nfbbis7p47gl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAcZlvJpnPH32Yqb-49nyPeG8nFoPGpzMs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "69205182071-91n31hp2h19edihe38c0nfbbis7p47gl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

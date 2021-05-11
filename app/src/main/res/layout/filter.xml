@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/filter_background"
+    android:orientation="vertical">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardCornerRadius="20dp"
+        android:layout_margin="20dp"
+        android:elevation="15dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_margin="20dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Filters"
+                android:textSize="35sp"
+                android:textColor="#000"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Price"
+                android:textStyle="bold"
+                android:textColor="#000"
+                android:textSize="20sp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"/>
+
+            <RadioGroup
+                android:id="@+id/price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RadioButton
+                    android:id="@+id/low"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="low to high"
+                    android:textSize="15sp"
+                    android:textColor="#000"
+                    android:layout_marginLeft="10dp"
+                    android:buttonTint="@color/black"/>
+
+                <RadioButton
+                    android:id="@+id/high"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="high to low"
+                    android:textSize="15sp"
+                    android:textColor="#000"
+                    android:layout_marginLeft="10dp"
+                    android:buttonTint="@color/black"/>
+
+            </RadioGroup>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Size"
+                android:textStyle="bold"
+                android:textColor="#000"
+                android:textSize="20sp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"/>
+
+            <RadioGroup
+                android:id="@+id/size"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/s"
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="S"
+                    android:background="@drawable/radio_selector"
+                    android:textColor="@drawable/text_selector"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+                    android:textAlignment="center"
+                    android:button="@color/transparent"/>
+
+                <RadioButton
+                    android:id="@+id/m"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="M"
+                    android:background="@drawable/radio_selector"
+                    android:textColor="@drawable/text_selector"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+                    android:textAlignment="center"
+                    android:button="@color/transparent"/>
+
+                <RadioButton
+                    android:id="@+id/l"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="L"
+                    android:background="@drawable/radio_selector"
+                    android:textColor="@drawable/text_selector"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+                    android:textAlignment="center"
+                    android:button="@color/transparent"/>
+
+                <RadioButton
+                    android:id="@+id/xl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Xl"
+                    android:background="@drawable/radio_selector"
+                    android:textColor="@drawable/text_selector"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+                    android:textAlignment="center"
+                    android:button="@color/transparent"/>
+
+                <RadioButton
+                    android:id="@+id/xxl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="XXl"
+                    android:background="@drawable/radio_selector"
+                    android:textColor="@drawable/text_selector"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+                    android:textAlignment="center"
+                    android:button="@color/transparent"/>
+            </RadioGroup>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sort"
+                android:textStyle="bold"
+                android:textColor="#000"
+                android:textSize="20sp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"/>
+
+            <RadioGroup
+                android:id="@+id/sort"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RadioButton
+                    android:id="@+id/shirts"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Shirts"
+                    android:textSize="15sp"
+                    android:textColor="#000"
+                    android:layout_marginLeft="10dp"
+                    android:buttonTint="@color/black"/>
+
+                <RadioButton
+                    android:id="@+id/pants"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Pants"
+                    android:textSize="15sp"
+                    android:textColor="#000"
+                    android:layout_marginLeft="10dp"
+                    android:buttonTint="@color/black"/>
+
+                <RadioButton
+                    android:id="@+id/dresses"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Jackets"
+                    android:textSize="15sp"
+                    android:textColor="#000"
+                    android:layout_marginLeft="10dp"
+                    android:buttonTint="@color/black"/>
+
+                <RadioButton
+                    android:id="@+id/all"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="All"
+                    android:textSize="15sp"
+                    android:textColor="#000"
+                    android:layout_marginLeft="10dp"
+                    android:buttonTint="@color/black"/>
+            </RadioGroup>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:orientation="horizontal">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    app:cardCornerRadius="20dp">
+
+                    <com.balysv.materialripple.MaterialRippleLayout
+                        style="@style/overlay"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/cancel_filter"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/light_gray"
+                            android:text="cancel"
+                            android:textColor="@color/dark_gray"
+                            android:gravity="center"
+                            android:textSize="18dp"
+                            android:padding="10dp"/>
+
+                    </com.balysv.materialripple.MaterialRippleLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    app:cardCornerRadius="20dp">
+
+                    <com.balysv.materialripple.MaterialRippleLayout
+                        style="@style/overlay"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/confirm_filter"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="#000"
+                            android:text="Confirm"
+                            android:textStyle="bold"
+                            android:textColor="#fff"
+                            android:gravity="center"
+                            android:textSize="18dp"
+                            android:padding="10dp"/>
+                    </com.balysv.materialripple.MaterialRippleLayout>
+
+                </androidx.cardview.widget.CardView>
+
+
+            </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+
+
+</LinearLayout>

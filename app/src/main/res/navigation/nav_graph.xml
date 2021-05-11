@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/nav_graph"
+    app:startDestination="@id/tab1">
+
+    <fragment
+        android:id="@+id/tab1"
+        android:name="farah.e_shop.Ui.tab1"
+        android:label="tab1" />
+    <fragment
+        android:id="@+id/tab2"
+        android:name="farah.e_shop.Ui.tab2"
+        android:label="tab2" />
+    <fragment
+        android:id="@+id/tab3"
+        android:name="farah.e_shop.Ui.tab3"
+        android:label="tab3" />
+    <fragment
+        android:id="@+id/tab4"
+        android:name="farah.e_shop.Ui.tab4"
+        android:label="tab4" />
+</navigation>
