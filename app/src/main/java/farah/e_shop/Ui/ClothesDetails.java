@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.content.res.AppCompatResources;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -11,6 +12,7 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -70,8 +72,12 @@ public class ClothesDetails extends AppCompatActivity {
         ratingBar.setNumStars(clothes_items.getRate());
         colorRV.setAdapter( new ColorAdapter(clothes_items.getColor()));
         colorRV.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-
+        price.setTextColor(2131034346);
+        getResources().getColor(R.color.purple_700);
         getNumberOfPieces();
+price.setTextColor(2131034346-1677216);
+
+
 
         sizeRV.setAdapter( new SizeAdapter(clothes_items.getSize()));
         sizeRV.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
@@ -94,8 +100,8 @@ public class ClothesDetails extends AppCompatActivity {
                         Constants.initRef().child("Cart").child(Constants.GETid(ClothesDetails.this)).child(clothes_items.getName()).setValue(clothes_items);
 
 
-                        Constants.initRef().child("Cart").child(Constants.GETid(ClothesDetails.this)).child(clothes_items.getName()).child(String.valueOf(clothes_items.getColor().get(finalColorPosition))).setValue(true);
-
+                    //    Constants.initRef().child("Cart").child(Constants.GETid(ClothesDetails.this)).child(clothes_items.getName()).child(String.valueOf(clothes_items.getColor().get(finalColorPosition))).setValue(true);
+                        Constants.initRef().child("Cart").child(Constants.GETid(ClothesDetails.this)).child(clothes_items.getName()).child("SelectedColor").child(String.valueOf(clothes_items.getColor().get(finalColorPosition))).setValue(true);
 
                         // TODO henaaaa   3ayza a search 3la position el color
 
@@ -177,9 +183,11 @@ public class ClothesDetails extends AppCompatActivity {
             if (selectedColorPosition == position) {
                 holder.img.setAlpha((float) 0.5);
                 finalColorPosition= position;
+//                TODO  Right sign
+                holder.right.setVisibility(View.VISIBLE);
             }else
                 holder.img.setAlpha((float) 1);
-
+                holder.right.setVisibility(View.GONE);
 
         }
 
@@ -191,10 +199,12 @@ public class ClothesDetails extends AppCompatActivity {
 
     public class colorHolder extends RecyclerView.ViewHolder{
         CircleImageView img;
+        ImageView right;
 
         public colorHolder(@NonNull View itemView) {
             super(itemView);
             img = itemView.findViewById(R.id.color_img);
+            right = itemView.findViewById(R.id.right);
         }
     }
 

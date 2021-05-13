@@ -14,6 +14,8 @@ import farah.e_shop.Models.Clothes_Items;
 import farah.e_shop.R;
 import farah.e_shop.Ui.WomenTab;
 
+import static androidx.core.content.res.TypedArrayUtils.getString;
+
 public class WomenClothes implements Serializable {
 
     public List<Clothes_Items> SetWomenClothes() {
@@ -48,7 +50,8 @@ public class WomenClothes implements Serializable {
         women.add(new Clothes_Items(R.drawable.pants2,"short pants",314,3, Arrays.asList("S","M","XL","XXL"),Arrays.asList(R.color.red, R.color.dark_gray, R.color.gold,R.color.pink),true));
         women.add(new Clothes_Items(R.drawable.pants3,"pants",186,3, Arrays.asList("S","M","XL","XXL"),Arrays.asList(R.color.black, R.color.light_gray, R.color.gold),true));
         women.add(new Clothes_Items(R.drawable.pants4,"cotton pants",243,3, Arrays.asList("S","M","XL","XXL"),Arrays.asList(R.color.teal_700,R.color.pink, R.color.dark_gray, R.color.gold),true));
-
         return women;
     }
+
+
 }
