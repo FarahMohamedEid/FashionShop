@@ -1,8 +1,6 @@
 package farah.e_shop.Ui;
 
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Paint;
@@ -29,13 +27,9 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
-import java.util.Objects;
 
-import farah.e_shop.Data.MenClothes;
 import farah.e_shop.Data.Offers;
-import farah.e_shop.MainActivity;
 import farah.e_shop.Models.Clothes_Items;
-import farah.e_shop.Models.Offers_Items;
 import farah.e_shop.R;
 import farah.e_shop.Utiles.Constants;
 
@@ -56,7 +50,7 @@ public class OffersTab extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         RV =v.findViewById(R.id.offer_RV);
-        List<Offers_Items> offers_items = new Offers().SetOffers();
+        List<Clothes_Items> offers_items = new Offers().SetOffers();
         GetOffers(offers_items);
     }
 
@@ -74,7 +68,7 @@ public class OffersTab extends Fragment {
 
 
 
-    public void  GetOffers(List<Offers_Items> list) {
+    public void  GetOffers(List<Clothes_Items> list) {
 
         if(list == null){
             Toast.makeText(getContext(), "null", Toast.LENGTH_LONG).show();
@@ -87,9 +81,9 @@ public class OffersTab extends Fragment {
 
 
     public class OffersAdapter extends RecyclerView.Adapter<OffersHolder>{
-        List<Offers_Items> Item ;
+        List<Clothes_Items> Item ;
 
-        public OffersAdapter(List<Offers_Items> menItem) {
+        public OffersAdapter(List<Clothes_Items> menItem) {
             this.Item = menItem;
             notifyDataSetChanged();
 
@@ -104,13 +98,13 @@ public class OffersTab extends Fragment {
 
         @Override
         public void onBindViewHolder(@NonNull OffersHolder holder, int position) {
-            Offers_Items items = Item.get(position);
-            String price1 = String.valueOf(items.getPrice1());
+            Clothes_Items items = Item.get(position);
+            String price1 = String.valueOf(items.getOld_price());
             String price2 = String.valueOf(items.getPrice());
             String percent = String.valueOf(items.getPercent());
             holder.price1.setText(price1+" $");
             holder.price2.setText(price2+" $");
-            holder.percent.setText(percent+" $");
+            holder.percent.setText(percent+"% OFF");
             holder.name.setText(items.getName());
             Picasso.get()
                     .load(items.getImg())
@@ -173,7 +167,7 @@ public class OffersTab extends Fragment {
 
 
 
-    void setLikes(final Offers_Items items, final ImageView imageView)
+    void setLikes(final Clothes_Items items, final ImageView imageView)
     {
         Constants.initRef().child("Likes").child(Constants.GETid(requireActivity())).addListenerForSingleValueEvent(new ValueEventListener()
         {
@@ -210,7 +204,7 @@ public class OffersTab extends Fragment {
         return attached;
     }
 
-    void setLikesColor(Offers_Items items, final ImageView imageView)
+    void setLikesColor(Clothes_Items items, final ImageView imageView)
     {
         Constants.initRef().child("Likes").child(Constants.GETid(requireActivity())).addValueEventListener(new ValueEventListener()
         {

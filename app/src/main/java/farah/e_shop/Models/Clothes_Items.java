@@ -7,17 +7,21 @@ import java.util.List;
 public class Clothes_Items implements Serializable {
     int img;
     String name;
-    int price;
+    int price,old_price,percent;
     int rate;
     List<String> size = new ArrayList<>();
     List<Integer> color = new ArrayList<>() ;
     boolean love;
+    String SelectedSize;
+    int SelectedColor;
+    int SelectedQuantity;
+
 
     public Clothes_Items() {
     }
 
 
-    public Clothes_Items(int img, String name, int price, int rate,List<String> size, List<Integer> color, boolean love) {
+    public Clothes_Items(int img, String name, int price, int rate,List<String> size, List<Integer> color, boolean love,String SelectedSize,int SelectedColor,int SelectedQuantity ) {
         this.img = img;
         this.name = name;
         this.price = price;
@@ -25,6 +29,39 @@ public class Clothes_Items implements Serializable {
         this.size = size;
         this.color = color;
         this.love = love;
+        this.SelectedSize = SelectedSize;
+        this.SelectedColor = SelectedColor;
+        this.SelectedQuantity = SelectedQuantity;
+    }
+
+    public Clothes_Items(int img, String name, int old_price, int price , int percent, int rate, List<String> size, List<Integer> color, boolean love,String SelectedSize, int SelectedColor,int SelectedQuantity) {
+        this.img = img;
+        this.name = name;
+        this.old_price = old_price;
+        this.price = price;
+        this.percent = percent;
+        this.rate = rate;
+        this.size = size;
+        this.color= color;
+        this.love = love;
+        this.SelectedSize = SelectedSize;
+        this.SelectedColor = SelectedColor;
+    }
+
+    public int getOld_price() {
+        return old_price;
+    }
+
+    public void setOld_price(int old_price) {
+        this.old_price = old_price;
+    }
+
+    public int getPercent() {
+        return percent;
+    }
+
+    public void setPercent(int percent) {
+        this.percent = percent;
     }
 
     public int getRate() {
@@ -81,5 +118,29 @@ public class Clothes_Items implements Serializable {
 
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    public String getSelectedSize() {
+        return SelectedSize;
+    }
+
+    public void setSelectedSize(String selectedSize) {
+        SelectedSize = selectedSize;
+    }
+
+    public int getSelectedColor() {
+        return SelectedColor;
+    }
+
+    public void setSelectedColor(int selectedColor) {
+        SelectedColor = selectedColor;
+    }
+
+    public int getSelectedQuantity() {
+        return SelectedQuantity;
+    }
+
+    public void setSelectedQuantity(int selectedQuantity) {
+        SelectedQuantity = selectedQuantity;
     }
 }

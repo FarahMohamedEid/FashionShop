@@ -112,8 +112,8 @@ public class AcessoriesTab extends Fragment {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent =new Intent(getContext(),ClothesDetails.class);
-                    intent.putExtra("women", Acc);
+                    Intent intent =new Intent(getContext(),OffersDetails.class);
+                    intent.putExtra("offer", Acc);
                     startActivity(intent);
                 }
             });

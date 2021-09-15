@@ -1,5 +1,6 @@
 package farah.e_shop.Ui;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -54,7 +55,7 @@ public class tab1 extends Fragment {
     ViewFlipper viewFlipper;
     RecyclerView RV;
 
-    TextView categoryLable;
+    TextView categoryLabel;
     ImageView filter;
 
 
@@ -79,7 +80,7 @@ public class tab1 extends Fragment {
 
     private void InItViews() {
 
-        categoryLable = v.findViewById(R.id.categoryLable);
+        categoryLabel = v.findViewById(R.id.categoryLable);
         RV = v.findViewById(R.id.Categories_RV);
         linearLayout = v.findViewById(R.id.tab1_linear);
         filter = v.findViewById(R.id.filter);
@@ -130,7 +131,6 @@ public class tab1 extends Fragment {
         category.add(new Categories(R.color.white, "Kids"));
         category.add(new Categories(R.color.white, "Acessories"));
 
-
         RV.setAdapter(new CategoriesAdapter(category));
 
 //        to make recycle view Horizontal :)
@@ -157,9 +157,7 @@ public class tab1 extends Fragment {
         }
 
         @Override
-        public void onBindViewHolder(@NonNull CategoriesHolder holder, int position) {
-
-
+        public void onBindViewHolder(@NonNull CategoriesHolder holder, @SuppressLint("RecyclerView") int position) {
             Categories CurrentCategory = categoriesList.get(position);
             holder.textView.setText(CurrentCategory.getCategoryName());
             Picasso.get()
@@ -226,7 +224,7 @@ public class tab1 extends Fragment {
         switch (position) {
             case 0:
                 ft.replace(R.id.frameLayout, new OffersTab());
-                categoryLable.setText(" Today Offers");
+                categoryLabel.setText(" Today Offers");
                 filter.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -236,7 +234,7 @@ public class tab1 extends Fragment {
                 break;
             case 1:
                 ft.replace(R.id.frameLayout, new WomenTab());
-                categoryLable.setText("Women's clothes");
+                categoryLabel.setText("Women's clothes");
                 filter.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -246,7 +244,7 @@ public class tab1 extends Fragment {
                 break;
             case 2:
                 ft.replace(R.id.frameLayout, new MenTab());
-                categoryLable.setText("Men's clothes");
+                categoryLabel.setText("Men's clothes");
                 filter.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -256,7 +254,7 @@ public class tab1 extends Fragment {
                 break;
             case 3:
                 ft.replace(R.id.frameLayout, new KidsTab());
-                categoryLable.setText("Kids's clothes");
+                categoryLabel.setText("Kid's clothes");
                 filter.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -266,7 +264,7 @@ public class tab1 extends Fragment {
                 break;
             case 4:
                 ft.replace(R.id.frameLayout, new AcessoriesTab());
-                categoryLable.setText("Accessories");
+                categoryLabel.setText("Accessories");
                 filter.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -320,51 +318,51 @@ public class tab1 extends Fragment {
                 }
 
 
-//                to get lest of clothes to sort it :)
-                List<Clothes_Items> women = new WomenClothes().SetWomenClothes();
-
-                if (selectedPriceGroup == R.id.low) {
-
-//                    price from low to high :)
-                    Collections.sort(women, new Comparator<Clothes_Items>() {
-                        @Override
-                        public int compare(Clothes_Items c1, Clothes_Items c2) {
-                            if (c1.getPrice() == c2.getPrice())
-                                return 0;
-                            else if (c2.getPrice() < c1.getPrice()) {
-                                return 1;
-                            } else
-                                return -1;
-                        }
-                    });
-                    new WomenTab().GetWomenClothes(women);
-                    alertDialog.dismiss();
-
-                } else if (selectedPriceGroup == R.id.high) {
-
-                    //        price from high to low :)
-                    Collections.sort(women, new Comparator<Clothes_Items>() {
-                        @Override
-                        public int compare(Clothes_Items c1, Clothes_Items c2) {
-                            if (c1.getPrice() == c2.getPrice())
-                                return 0;
-                            else if (c2.getPrice() > c1.getPrice()) {
-                                return 1;
-                            } else
-                                return -1;
-                        }
-                    });
-                    new WomenTab().GetWomenClothes(women);
-                    alertDialog.dismiss();
-                }
+//                to get list of clothes to sort it :)
+//                List<Clothes_Items> women = new WomenClothes().SetWomenClothes();
+//
+//                if (selectedPriceGroup == R.id.low) {
+//
+////                    price from low to high :)
+//                    Collections.sort(women, new Comparator<Clothes_Items>() {
+//                        @Override
+//                        public int compare(Clothes_Items c1, Clothes_Items c2) {
+//                            if (c1.getPrice() == c2.getPrice())
+//                                return 0;
+//                            else if (c2.getPrice() < c1.getPrice()) {
+//                                return 1;
+//                            } else
+//                                return -1;
+//                        }
+//                    });
+//                    new WomenTab().GetWomenClothes(women);
+//                    alertDialog.dismiss();
+//
+//                } else if (selectedPriceGroup == R.id.high) {
+//
+//                    //        price from high to low :)
+//                    Collections.sort(women, new Comparator<Clothes_Items>() {
+//                        @Override
+//                        public int compare(Clothes_Items c1, Clothes_Items c2) {
+//                            if (c1.getPrice() == c2.getPrice())
+//                                return 0;
+//                            else if (c2.getPrice() > c1.getPrice()) {
+//                                return 1;
+//                            } else
+//                                return -1;
+//                        }
+//                    });
+//                    new WomenTab().GetWomenClothes(women);
+//                    alertDialog.dismiss();
+//                }
 
 
             }
         });
 
+
+
         alertDialog.show();
-
-
 
     }
 

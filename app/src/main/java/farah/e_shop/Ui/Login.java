@@ -1,5 +1,7 @@
 package farah.e_shop.Ui;
 
+import static com.facebook.FacebookSdk.setAutoLogAppEventsEnabled;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -22,6 +24,9 @@ import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.HttpMethod;
 import com.facebook.LoginStatusCallback;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
@@ -48,9 +53,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Objects;
 
 public class Login extends AppCompatActivity {
     TextView goToSignUp,forget;
@@ -121,7 +125,7 @@ public class Login extends AppCompatActivity {
                 String Pass = password.getText().toString();
 
                 if (Email.isEmpty() || Pass.isEmpty()) {
-                    Toast.makeText(Login.this, "enter data", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Login.this, "Complete your data please", Toast.LENGTH_LONG).show();
                     return;
                 }
 
@@ -143,6 +147,8 @@ public class Login extends AppCompatActivity {
                     @Override
                     public void onSuccess(LoginResult loginResult) {
                         handleFacebookAccessToken(loginResult.getAccessToken());
+                        setAutoLogAppEventsEnabled(true);
+
                     }
 
                     @Override
@@ -187,16 +193,18 @@ public class Login extends AppCompatActivity {
                 });
     }
 
+
     private void updateUI(FirebaseUser user) {
 
         if (user == null)
             Toast.makeText(this, "null", Toast.LENGTH_SHORT).show();
-        String name = user.getDisplayName();
+
+        String name = Objects.requireNonNull(user).getDisplayName();
         String email = user.getEmail();
         String id = user.getUid();
-        String img = user.getPhotoUrl().toString();
+        String img = Objects.requireNonNull(user.getPhotoUrl()).toString();
 
-        CreateUserDataBase(name,email,id,img);
+        CreateUserDataBase(name,email,id, img);
         Constants.SAVEid(Login.this,id);
         startActivity(new Intent(Login.this, MainActivity.class));
 
@@ -212,10 +220,10 @@ public class Login extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
-                    Constants.SAVEid(Login.this,task.getResult().getUser().getUid());
+                    Constants.SAVEid(Login.this, Objects.requireNonNull(Objects.requireNonNull(task.getResult()).getUser()).getUid());
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 }else {
-                    Toast.makeText(Login.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Login.this, Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_LONG).show();
                 }
 
             }

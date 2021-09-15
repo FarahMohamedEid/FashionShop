@@ -5,7 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Ui.ClothesDetails"
     android:orientation="vertical">
 
 
@@ -27,13 +26,16 @@
         android:id="@+id/offer_percent2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignRight="@id/offer_img2"
+        android:layout_alignBottom="@id/offer_img2"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="15dp"
         android:background="@drawable/ic_offer"
         android:gravity="center"
         android:padding="8dp"
         android:text="15%"
-        android:layout_alignBottom="@id/offer_img2"
-        android:layout_alignRight="@id/offer_img2"
-        android:layout_margin="15dp"
         android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold" />
@@ -131,8 +133,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/size_RV"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:listitem="@layout/size_item"/>
+            android:layout_height="wrap_content"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -165,21 +166,18 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
             android:orientation="horizontal">
 
-            <TextView
+            <ImageView
                 android:id="@+id/fav_btn_less"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/btn_background"
-                android:text="-"
-                android:textAlignment="center"
-                android:textColor="@color/white"
-                android:textSize="20sp"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_minus_symbol"
                 android:gravity="center"/>
 
             <TextView
-                android:id="@+id/fav_tv_number"
+                android:id="@+id/quantity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -189,14 +187,11 @@
                 android:layout_marginLeft="20dp"
                 android:text="0" />
 
-            <TextView
+            <ImageView
                 android:id="@+id/fav_btn_more"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/btn_background"
-                android:text="+"
-                android:textColor="@color/white"
-                android:textSize="18sp"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_add"
                 android:gravity="center"/>
         </LinearLayout>
 

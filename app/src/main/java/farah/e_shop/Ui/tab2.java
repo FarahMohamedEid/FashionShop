@@ -1,6 +1,7 @@
 package farah.e_shop.Ui;
 
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,26 +9,19 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.balysv.materialripple.MaterialRippleLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
-import farah.e_shop.Data.WomenClothes;
 import farah.e_shop.Models.Clothes_Items;
-import farah.e_shop.Models.Offers_Items;
 import farah.e_shop.R;
 import farah.e_shop.Utiles.Constants;
 
@@ -105,24 +99,46 @@ public class tab2 extends Fragment implements Serializable {
         public void onBindViewHolder(@NonNull FavHolder holder, int position) {
             Clothes_Items loved = items.get(position);
 
-            String price = String.valueOf(loved.getPrice());
-            holder.name.setText(loved.getName());
-            holder.price.setText(price + " $");
-            Picasso.get()
-                    .load(loved.getImg())
-                    .fit()
-                    .into(holder.imageView);
+            if(loved.getPercent()==0){
+                holder.offerBackground.setVisibility(View.GONE);
+                holder.old_price.setVisibility(View.GONE);
+                String price = String.valueOf(loved.getPrice());
+                holder.name.setText(loved.getName());
+                holder.price.setText(price + " $");
+                Picasso.get()
+                        .load(loved.getImg())
+                        .fit()
+                        .into(holder.imageView);
 
-            holder.more.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent =new Intent(getContext(),ClothesDetails.class);
-                    intent.putExtra("women", loved);
-                    startActivity(intent);
-                }
-            });
+                holder.more.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent =new Intent(getContext(),OffersDetails.class);
+                        intent.putExtra("offer", loved);
+                        startActivity(intent);
+                    }
+                });
+            } else {
+                String old_price = String.valueOf(loved.getOld_price());
+                String price = String.valueOf(loved.getPrice());
+                holder.offerBackground.setText(loved.getPercent()+"% OFF");
+                holder.name.setText(loved.getName());
+                holder.price.setText(old_price+" $");
+                holder.old_price.setText(price + " $");
+                Picasso.get()
+                        .load(loved.getImg())
+                        .fit()
+                        .into(holder.imageView);
 
-
+                holder.more.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent =new Intent(getContext(),OffersDetails.class);
+                        intent.putExtra("offer", loved);
+                        startActivity(intent);
+                    }
+                });
+            }
         }
 
         @Override
@@ -141,6 +157,8 @@ public class tab2 extends Fragment implements Serializable {
         ImageView imageView;
         TextView name;
         TextView price;
+        TextView old_price;
+        TextView offerBackground;
         MaterialRippleLayout more;
 
 
@@ -149,7 +167,13 @@ public class tab2 extends Fragment implements Serializable {
             imageView = itemView.findViewById(R.id.fav_img);
             name = itemView.findViewById(R.id.fav_name);
             price = itemView.findViewById(R.id.fav_price);
+            old_price = itemView.findViewById(R.id.old_price);
             more= itemView.findViewById(R.id.fav_more);
+            offerBackground= itemView.findViewById(R.id.offer_background);
+
+
+            old_price.setPaintFlags(old_price.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+
 
         }
     }

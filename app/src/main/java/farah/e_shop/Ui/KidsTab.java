@@ -110,8 +110,8 @@ public class KidsTab extends Fragment {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent =new Intent(getContext(),ClothesDetails.class);
-                    intent.putExtra("women", kid);
+                    Intent intent =new Intent(getContext(),OffersDetails.class);
+                    intent.putExtra("offer", kid);
                     startActivity(intent);
                 }
             });

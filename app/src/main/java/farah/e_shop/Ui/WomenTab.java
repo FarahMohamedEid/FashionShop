@@ -107,8 +107,8 @@ public class WomenTab extends Fragment implements Serializable {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent =new Intent(getContext(),ClothesDetails.class);
-                    intent.putExtra("women", Women);
+                    Intent intent =new Intent(getContext(),OffersDetails.class);
+                    intent.putExtra("offer", Women);
                     startActivity(intent);
                 }
             });

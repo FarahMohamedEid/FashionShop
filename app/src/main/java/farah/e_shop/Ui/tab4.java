@@ -1,12 +1,13 @@
 package farah.e_shop.Ui;
 
 import android.content.Intent;
-import android.net.Uri;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,7 +16,6 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import com.facebook.login.LoginManager;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -25,9 +25,6 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
-
-import java.util.Objects;
-
 import de.hdodenhof.circleimageview.CircleImageView;
 import farah.e_shop.Models.UserModel;
 import farah.e_shop.R;
@@ -38,8 +35,6 @@ public class tab4 extends Fragment {
     UserModel userModel;
     CircleImageView img;
     TextView name, email, signOut;
-
-
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
     FirebaseStorage firebaseStorage;
@@ -48,7 +43,7 @@ public class tab4 extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        v = inflater.inflate(R.layout.tab4, container, false);
+        v = inflater.inflate(R.layout.profile, container, false);
         return v;
     }
 
@@ -68,7 +63,7 @@ public class tab4 extends Fragment {
         firebaseStorage = FirebaseStorage.getInstance();
         storageReference = firebaseStorage.getReference();
 
-        databaseReference.child("UserData").child(Constants.GETid(getActivity())).addValueEventListener(new ValueEventListener() {
+        databaseReference.child("UserData").child(Constants.GETid(requireActivity())).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
@@ -80,7 +75,7 @@ public class tab4 extends Fragment {
                     name.setText(userModel.getName());
                     email.setText(userModel.getEmail());
                     if (userModel.getImg() == null) {
-                        img.setImageResource(R.drawable.ic_user);
+                        img.setImageResource(R.drawable.ic_woman);
                     } else {
                         Picasso.get().load(userModel.getImg()).into(img);
                     }
@@ -95,8 +90,7 @@ public class tab4 extends Fragment {
         });
 
         signOut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+            @Override public void onClick(View view) {
                 LoginManager.getInstance().logOut();
                 FirebaseAuth.getInstance().signOut();
                 Constants.SAVEid(getActivity(),null);
@@ -107,8 +101,9 @@ public class tab4 extends Fragment {
                 NavController controller = Navigation.findNavController(view);
                 controller.popBackStack(R.id.tab4, true);
             }
-        });
+      });
 
     }
+
 
 }

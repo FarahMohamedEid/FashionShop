@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="150dp"
+    android:layout_height="180dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
@@ -17,8 +17,8 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:id="@+id/fav_img"
-                android:layout_width="180dp"
+                android:id="@+id/cart_img"
+                android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:src="@drawable/fff"
                 android:scaleType="fitXY"/>
@@ -28,22 +28,39 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/fav_name"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:maxLines="1"
-                    android:ellipsize="end"
-                    android:text="item name"
-                    android:textColor="#000"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="10dp"
-                    android:padding="3dp"/>
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/cart_name"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        android:text="item name"
+                        android:textColor="#000"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="10dp"
+                        android:padding="3dp"
+                        android:layout_weight="1"/>
+                    <ImageView
+                        android:id="@+id/delete"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_delete"
+                        android:layout_gravity="bottom"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="10dp"/>
+
+                </LinearLayout>
+
                 <TextView
-                    android:id="@+id/fav_price"
+                    android:id="@+id/cart_price"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="price"
@@ -52,6 +69,59 @@
                     android:layout_marginLeft="10dp"
                     android:textSize="14sp"/>
 
+                <LinearLayout
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="3dp"
+                        android:text="Size :"/>
+
+                    <TextView
+                        android:id="@+id/cart_selected_size"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="3dp"
+                        android:text="M"/>
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="15dp"
+                        android:layout_margin="5dp"
+                        android:background="@color/black"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="3dp"
+                        android:text="Color :"/>
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/cart_selected_color"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:padding="1dp"
+                        android:layout_gravity="center"
+                        app:civ_border_color="@color/black"
+                        app:civ_border_width="1dp"/>
+
+                    <TextView
+                        android:id="@+id/num_of_pieces"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:padding="3dp"
+                        android:text="x 2"/>
+
+
+
+                </LinearLayout>
+
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -59,7 +129,7 @@
                     app:cardCornerRadius="20dp">
 
                     <com.balysv.materialripple.MaterialRippleLayout
-                        android:id="@+id/signUp"
+                        android:id="@+id/cart_edit"
                         style="@style/overlay"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
@@ -68,7 +138,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="#000"
-                            android:text="Delete"
+                            android:text="Edit ... "
                             android:textStyle="bold"
                             android:textColor="#fff"
                             android:gravity="center"
@@ -82,5 +152,4 @@
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
-
 </LinearLayout>

@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,6 +23,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import farah.e_shop.Models.Clothes_Items;
 import farah.e_shop.R;
 import farah.e_shop.Utiles.Constants;
@@ -32,6 +32,11 @@ public class tab3 extends Fragment {
     View v;
     RecyclerView RV;
     List<Clothes_Items> clothesItems = new ArrayList<>();
+    LinearLayout noCartLinear;
+    LinearLayout total_linear;
+    int total;
+    TextView total_tv;
+    MaterialRippleLayout continue_btn;
 
     @Nullable
     @Override
@@ -44,10 +49,22 @@ public class tab3 extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         RV = v.findViewById(R.id.cart_RV);
+        noCartLinear =v.findViewById(R.id.no_cart_linear);
+        total_linear =v.findViewById(R.id.total_linear);
+        total_tv =v.findViewById(R.id.total_tv);
+        continue_btn =v.findViewById(R.id.continue_btn);
+        getTotal();
         getCart();
+
+        continue_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), Check_out.class));
+            }
+        });
+
     }
 
-// TODO lsa m4 3arfa agebha 3l4an mb3ota 8lt
     private void getCart() {
         Constants.initRef().child("Cart").child(Constants.GETid(requireActivity())).addValueEventListener(new ValueEventListener() {
             @Override
@@ -55,14 +72,11 @@ public class tab3 extends Fragment {
 
                 if (clothesItems != null) {
                     clothesItems.clear();
-
                     for (DataSnapshot d : snapshot.getChildren()) {
-                        LinearLayout linearLayout =v.findViewById(R.id.no_cart_linear);
-                        linearLayout.setVisibility(View.GONE);
+                        noCartLinear.setVisibility(View.GONE);
+                        total_linear.setVisibility(View.VISIBLE);
                         Clothes_Items cloth = d.getValue(Clothes_Items.class);
                         clothesItems.add(cloth);
-
-
                     }
                 }
                 RV.setAdapter(new CartAdapter(clothesItems));
@@ -89,27 +103,37 @@ public class tab3 extends Fragment {
         @NonNull
         @Override
         public CartHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View view = getLayoutInflater().inflate(R.layout.fav_item, parent, false);
+            View view = getLayoutInflater().inflate(R.layout.cart_item, parent, false);
             return new CartHolder(view);
         }
 
         @Override
         public void onBindViewHolder(@NonNull CartHolder holder, int position) {
-            Clothes_Items loved = items.get(position);
+            Clothes_Items cart = items.get(position);
 
-            String price = String.valueOf(loved.getPrice());
-            holder.name.setText(loved.getName());
+            holder.selectedSize.setText(cart.getSelectedSize());
+            int price = cart.getPrice()* cart.getSelectedQuantity();
+            holder.name.setText(cart.getName());
             holder.price.setText(price + " $");
             Picasso.get()
-                    .load(loved.getImg())
+                    .load(cart.getImg())
                     .fit()
                     .into(holder.imageView);
+            holder.selectedColor.setImageResource(cart.getSelectedColor());
+            holder.num_of_pieces.setText("x "+cart.getSelectedQuantity());
 
-            holder.more.setOnClickListener(new View.OnClickListener() {
+            holder.delete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent =new Intent(getContext(),ClothesDetails.class);
-                    intent.putExtra("women", loved);
+                    Constants.initRef().child("Cart").child(Constants.GETid(getActivity())).child(cart.getName()).removeValue();
+                }
+            });
+
+            holder.edit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent =new Intent(getContext(),OffersDetails.class);
+                    intent.putExtra("offer", cart);
                     startActivity(intent);
                 }
             });
@@ -131,23 +155,51 @@ public class tab3 extends Fragment {
 
     public class CartHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
+        ImageView delete;
         TextView name;
         TextView price;
-        MaterialRippleLayout more;
+        TextView selectedSize;
+        TextView num_of_pieces;
+        MaterialRippleLayout edit;
+        CircleImageView selectedColor;
+
 
 
         public CartHolder(@NonNull View itemView) {
             super(itemView);
-            imageView = itemView.findViewById(R.id.fav_img);
-            name = itemView.findViewById(R.id.fav_name);
-            price = itemView.findViewById(R.id.fav_price);
-            more= itemView.findViewById(R.id.fav_more);
-
+            imageView = itemView.findViewById(R.id.cart_img);
+            delete = itemView.findViewById(R.id.delete);
+            name = itemView.findViewById(R.id.cart_name);
+            price = itemView.findViewById(R.id.cart_price);
+            edit= itemView.findViewById(R.id.cart_edit);
+            selectedSize= itemView.findViewById(R.id.cart_selected_size);
+            selectedColor= itemView.findViewById(R.id.cart_selected_color);
+            num_of_pieces= itemView.findViewById(R.id.num_of_pieces);
         }
     }
 
 
 
+    private void getTotal(){
+        Constants.initRef().child("Cart").child(Constants.GETid(requireActivity())).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                total = 0;
+                for (DataSnapshot d : snapshot.getChildren()) {
+                    Clothes_Items cloth = d.getValue(Clothes_Items.class);
+                    int price = (cloth.getPrice()*cloth.getSelectedQuantity());
+                    total=total+price;
+                }
+                total_tv.setText(total+" $");
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        }
 
 
 

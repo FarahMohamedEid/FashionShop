@@ -109,8 +109,8 @@ public class MenTab extends Fragment {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent =new Intent(getContext(),ClothesDetails.class);
-                    intent.putExtra("women", Men);
+                    Intent intent =new Intent(getContext(),OffersDetails.class);
+                    intent.putExtra("offer", Men);
                     startActivity(intent);
                 }
             });

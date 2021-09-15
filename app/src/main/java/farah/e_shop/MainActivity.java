@@ -35,7 +35,7 @@ import farah.e_shop.Data.WomenClothes;
 import farah.e_shop.Models.Clothes_Items;
 import farah.e_shop.Ui.WomenTab;
 
-import static androidx.constraintlayout.solver.widgets.ConstraintWidget.GONE;
+
 
 public class MainActivity extends AppCompatActivity {
 
